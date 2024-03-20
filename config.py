@@ -6,12 +6,12 @@ def get_config():
     parser = argparse.ArgumentParser(description='Disentangled Generative Causal Representation (DEAR)')
 
     # Data settings
-    parser.add_argument('--image_size', type=int, default=64)
+    parser.add_argument('--image_size', type=int, default=32)
     parser.add_argument('--dataset', type=str, default='celeba', choices=['celeba', 'pendulum'])
     parser.add_argument('--data_dir', type=str, default='./pendulum/', help='data directory')
 
     # Training settings
-    parser.add_argument('--batch_size', type=int, default=128)
+    parser.add_argument('--batch_size', type=int, default=64)
     parser.add_argument('--lr_g', type=float, default=5e-5)
     parser.add_argument('--lr_e', type=float, default=5e-5)
     parser.add_argument('--lr_d', type=float, default=1e-4)
