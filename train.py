@@ -151,6 +151,7 @@ def train(epoch, model, discriminator, encoder_optimizer, decoder_optimizer, D_o
         label = label.to(device)
 
         # ================== TRAIN DISCRIMINATOR ================== #
+        print('starting discriminator training...')
         for _ in range(args.d_steps_per_iter):
             discriminator.zero_grad()
 
@@ -186,7 +187,9 @@ def train(epoch, model, discriminator, encoder_optimizer, decoder_optimizer, D_o
             else:
                 z_fake, x_fake, z_fake_mean = model(x, z)
 
+            print('finished training discriminator...')
             # ================== TRAIN ENCODER ================== #
+            print('starting encoder training...')
             model.zero_grad()
             # WITH THE GENERATIVE LOSS
             encoder_score = discriminator(x, z_fake)
@@ -213,7 +216,9 @@ def train(epoch, model, discriminator, encoder_optimizer, decoder_optimizer, D_o
             if 'scm' in args.prior:
                 prior_optimizer.step()
 
+            print('finished training encoder...')
             # ================== TRAIN GENERATOR ================== #
+            print('starting generator training...')
             model.zero_grad()
 
             decoder_score = discriminator(x_fake, z)
@@ -229,6 +234,7 @@ def train(epoch, model, discriminator, encoder_optimizer, decoder_optimizer, D_o
                 A_optimizer.step()
                 prior_optimizer.step()
 
+            print('fininished training generator...')
         # Print out losses
         if batch_idx == 0 or (batch_idx + 1) % print_every == 0:
             log = ('Train Epoch: {} ({:.0f}%)\tD loss: {:.4f}, Encoder loss: {:.4f}, Decoder loss: {:.4f}, Sup loss: {:.4f}, '
