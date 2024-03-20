@@ -77,6 +77,7 @@ def main():
     discriminator = BigJointDiscriminator(args.latent_dim, args.d_conv_dim, args.image_size,
                                           args.dis_fc_size)
 
+    print('Finished building models.')
     A_optimizer = None
     prior_optimizer = None
     if 'scm' in args.prior:
@@ -92,6 +93,8 @@ def main():
     decoder_optimizer = optim.Adam(dec_param, lr=args.lr_g, betas=(args.beta1, args.beta2))
     D_optimizer = optim.Adam(discriminator.parameters(), lr=args.lr_d, betas=(args.beta1, args.beta2))
 
+    print('Prior parameters:...')
+    print(prior_param)
     # Load model from checkpoint
     if args.resume:
         ckpt_dir = args.ckpt_dir if args.ckpt_dir != '' else save_dir + args.model_type + str(

@@ -121,6 +121,8 @@ class BGM(nn.Module):
             self.prior = SCM(num_label, A, scm_type=prior)
 
     def encode(self, x, mean=False, avepool=False):
+
+        print('I am now in BGM encode function...')
         if avepool:
             return self.encoder(x, avepool=True)
         else:
@@ -135,6 +137,7 @@ class BGM(nn.Module):
                 return self.encoder(x)
 
     def decode(self, z, mean=True):
+        print('I am now in BGM decode function...')
         if self.decoder_type != 'gaussian':
             return self.decoder(z)
         else: #gaussian
@@ -159,6 +162,8 @@ class BGM(nn.Module):
         return sample
 
     def forward(self, x=None, z=None, recon=False, infer_mean=True):
+
+        print('I am now in BGM forward function...')
         # recon_mean is used for gaussian decoder which we do not use here.
         # Training Mode
         if x is not None and z is not None:
