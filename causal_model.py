@@ -9,8 +9,8 @@ class InvertiblePriorLinear(nn.Module):
         super(InvertiblePriorLinear, self).__init__()
         self.p = nn.Parameter(torch.rand([2]))
         print("this is p")
-        print(p)
-        print(p.size())
+        print(self.p)
+        print(self.p.size())
     def forward(self, eps):
         o = self.p[0] * eps + self.p[1]
         return o
