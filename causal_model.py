@@ -8,7 +8,9 @@ class InvertiblePriorLinear(nn.Module):
     def __init__(self):
         super(InvertiblePriorLinear, self).__init__()
         self.p = nn.Parameter(torch.rand([2]))
-
+        print("this is p")
+        print(p)
+        print(p.size())
     def forward(self, eps):
         o = self.p[0] * eps + self.p[1]
         return o
@@ -94,7 +96,9 @@ class SCM(nn.Module):
         # Elementwise nonlinear mappings
         if scm_type=='linscm':
             prior_net_model = lambda : InvertiblePriorLinear()
+            print(prior_net_model)
             prior_net_enc_model = lambda x: InvertiblePriorInv(x)
+            print(prior_net_enc_model)
         elif scm_type=='nlrscm':
             prior_net_model = lambda : InvertiblePWL()
             prior_net_enc_model = lambda x: InvertiblePriorInv(x)

@@ -156,7 +156,7 @@ def train(epoch, model, discriminator, encoder_optimizer, decoder_optimizer, D_o
             discriminator.zero_grad()
 
             print("Size X:")
-            print(x.size)
+            print(x.size())
             # Sample z from prior p_z
             if args.prior == 'uniform':
                 z = torch.rand(x.size(0), args.latent_dim, device=x.device) * 2 - 1
@@ -164,7 +164,7 @@ def train(epoch, model, discriminator, encoder_optimizer, decoder_optimizer, D_o
                 z = torch.randn(x.size(0), args.latent_dim, device=x.device)
 
             print("Size Z:")
-            print(z.size)
+            print(z.size())
             # Get inferred latent z = E(x) and generated image x = G(z)
             if 'scm' in args.prior:
                 z_fake, x_fake, z, _ = model(x, z)
@@ -172,7 +172,7 @@ def train(epoch, model, discriminator, encoder_optimizer, decoder_optimizer, D_o
                 z_fake, x_fake, _ = model(x, z)
 
             print("Sizes of z_fake, x_fake, z in train discriminator")
-            print(z_fake.size, x_fake.size, z.size)
+            print(z_fake.size(), x_fake.size(), z.size())
             # Compute D loss
             encoder_score = discriminator(x, z_fake.detach())
             decoder_score = discriminator(x_fake.detach(), z.detach())

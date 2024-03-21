@@ -186,9 +186,9 @@ class BGM(nn.Module):
                 label_z = self.prior(z[:, :self.num_label]) # z after causal layer
                 print("Prior and label z size")
                 print(self.prior)
-                print(label_z.size)
+                print(label_z.size())
                 other_z = z[:, self.num_label:]
-                print(other_z.size)
+                print(other_z.size())
                 z = torch.cat([label_z, other_z], dim=1)
 
                 #print("this is z after causal layer:")
