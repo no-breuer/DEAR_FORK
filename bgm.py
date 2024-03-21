@@ -185,7 +185,8 @@ class BGM(nn.Module):
                 # in prior
                 label_z = self.prior(z[:, :self.num_label]) # z after causal layer
                 #print("label z size")
-                #print(self.prior)
+                print("this is self.prior")
+                print(self.prior)
                 #print(label_z.size())
                 #print(label_z)
                 other_z = z[:, self.num_label:]

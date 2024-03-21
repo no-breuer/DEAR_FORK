@@ -11,7 +11,7 @@ class InvertiblePriorLinear(nn.Module):
 
     def forward(self, eps):
         o = self.p[0] * eps + self.p[1]
-        print("this is o and eps")
+        #print("this is o and eps")
         return o
     def inverse(self, o):
         eps = (o - self.p[1])/self.p[0]
