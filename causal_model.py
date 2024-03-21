@@ -12,8 +12,6 @@ class InvertiblePriorLinear(nn.Module):
     def forward(self, eps):
         o = self.p[0] * eps + self.p[1]
         print("this is o and eps")
-        print(o.size(), eps.size())
-        print(o, eps)
         return o
     def inverse(self, o):
         eps = (o - self.p[1])/self.p[0]
@@ -135,6 +133,7 @@ class SCM(nn.Module):
 
     def mask(self, z): # Az
         z = torch.matmul(z, self.A)
+        print(self.A)
         return z
 
     def inv_cal(self, eps): # (I-A)^{-1}*eps
@@ -166,4 +165,8 @@ class SCM(nn.Module):
             z = self.enc_nlr(z)
             # mask z
             z_new = self.mask(z) # new f_2^{-1}(z) (without noise)
+
+            print("this is z_new")
+            print(z_new, z)
+
             return z_new, z
