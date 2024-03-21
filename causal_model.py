@@ -11,10 +11,13 @@ class InvertiblePriorLinear(nn.Module):
 
     def forward(self, eps):
         o = self.p[0] * eps + self.p[1]
-        #print("this is o and eps")
+        print("forward path eps")
+        print(eps.size())
         return o
     def inverse(self, o):
         eps = (o - self.p[1])/self.p[0]
+        print("inverse path eps")
+        print(eps.size())
         return eps
 
 class InvertiblePWL(nn.Module):
@@ -79,8 +82,10 @@ class InvertiblePriorInv(nn.Module):
         super(InvertiblePriorInv, self).__init__()
         self.prior = prior
     def forward(self, o):
+        print("we are in invertpriorinv")
         return self.prior.inverse(o)
     def inverse(self, eps):
+        print("we are in invertpriorinv")
         return self.prior(eps)
 
 
@@ -155,6 +160,7 @@ class SCM(nn.Module):
         return self.prior_nlr(z_new)
 
     def forward(self, eps=None, z=None):
+        print("we are in scm forward")
         if eps is not None and z is None:
             # (I-A.t)^{-1}*eps
             z = self.inv_cal(eps) # n x d
@@ -165,8 +171,5 @@ class SCM(nn.Module):
             z = self.enc_nlr(z)
             # mask z
             z_new = self.mask(z) # new f_2^{-1}(z) (without noise)
-
-            print("this is z_new")
-            print(z_new, z)
 
             return z_new, z
