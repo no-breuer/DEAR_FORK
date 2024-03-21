@@ -120,6 +120,11 @@ class BGM(nn.Module):
         if 'scm' in prior:
             self.prior = SCM(num_label, A, scm_type=prior)
 
+        print("SCM prior:")
+        print(prior)
+        print("num_label:")
+        print(self.num_label)
+
     def encode(self, x, mean=False, avepool=False):
 
         #print('I am now in BGM encode function...')
@@ -165,11 +170,16 @@ class BGM(nn.Module):
         # recon_mean is used for gaussian decoder which we do not use here.
         # Training Mode
         if x is not None and z is not None:
+            print("In forward path x:")
+            print(x)
             if self.enc_dist == 'gaussian':
                 z_mu, z_logvar = self.encoder(x)
                 z_fake = reparameterize(z_mu, (z_logvar / 2).exp())
             else: # deterministic or implicit
                 z_fake = self.encoder(x)
+
+            print("z_fake in forward BMG class")
+            print(z_fake)
 
             if 'scm' in self.prior_dist:
                 # in prior
@@ -177,10 +187,15 @@ class BGM(nn.Module):
                 other_z = z[:, self.num_label:]
                 z = torch.cat([label_z, other_z], dim=1)
 
+                print("this is z after causal layer:")
+                print(z)
+
             x_fake = self.decoder(z)
+
 
             if 'scm' in self.prior_dist:
                 if self.enc_dist == 'gaussian' and infer_mean:
+                    print("this is z_fake, x_fake, z and z_mu after forward and scm prior")
                     return z_fake, x_fake, z, z_mu
                 else:
                     return z_fake, x_fake, z, None
