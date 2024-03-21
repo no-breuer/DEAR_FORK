@@ -167,6 +167,8 @@ class BGM(nn.Module):
         return sample
 
     def forward(self, x=None, z=None, recon=False, infer_mean=True):
+
+        print("we are in BGM forward")
         # recon_mean is used for gaussian decoder which we do not use here.
         # Training Mode
         if x is not None and z is not None:

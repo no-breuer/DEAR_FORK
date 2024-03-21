@@ -11,8 +11,6 @@ class InvertiblePriorLinear(nn.Module):
 
     def forward(self, eps):
         o = self.p[0] * eps + self.p[1]
-        print("forward path eps")
-        print(eps.size())
         return o
     def inverse(self, o):
         eps = (o - self.p[1])/self.p[0]
@@ -143,6 +141,10 @@ class SCM(nn.Module):
 
     def inv_cal(self, eps): # (I-A)^{-1}*eps
         adj_normalized = torch.inverse(torch.eye(self.A.shape[0], device=self.A.device) - self.A)
+        print("A:")
+        print(self.A)
+        print("adj normalized")
+        print(adj_normalized)
         z_pre = torch.matmul(eps, adj_normalized)
         return z_pre
 
@@ -160,7 +162,6 @@ class SCM(nn.Module):
         return self.prior_nlr(z_new)
 
     def forward(self, eps=None, z=None):
-        print("we are in scm forward")
         if eps is not None and z is None:
             # (I-A.t)^{-1}*eps
             z = self.inv_cal(eps) # n x d
