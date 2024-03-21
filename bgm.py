@@ -121,9 +121,9 @@ class BGM(nn.Module):
             self.prior = SCM(num_label, A, scm_type=prior)
 
         print("SCM prior:")
-        print(prior)
-        print("num_label:")
-        print(self.num_label)
+        print(self.prior)
+        #print("num_label:")
+        #print(self.num_label)
 
     def encode(self, x, mean=False, avepool=False):
 
@@ -184,9 +184,10 @@ class BGM(nn.Module):
             if 'scm' in self.prior_dist:
                 # in prior
                 label_z = self.prior(z[:, :self.num_label]) # z after causal layer
-                print("Prior and label z size")
-                print(self.prior)
+                print("label z size")
+                #print(self.prior)
                 print(label_z.size())
+                print(label_z)
                 other_z = z[:, self.num_label:]
                 print(other_z.size())
                 z = torch.cat([label_z, other_z], dim=1)

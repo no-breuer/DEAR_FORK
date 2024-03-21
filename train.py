@@ -167,12 +167,10 @@ def train(epoch, model, discriminator, encoder_optimizer, decoder_optimizer, D_o
             print(z.size())
             # Get inferred latent z = E(x) and generated image x = G(z)
             if 'scm' in args.prior:
-                z_fake, x_fake, z, _ = model(x, z)
+                z_fake, x_fake, z, _ = model(x, z) # torch.Size[128, 6]) torch.Size([128, 3, 64, 64]) torch.Size([128, 6]
             else:
                 z_fake, x_fake, _ = model(x, z)
 
-            print("Sizes of z_fake, x_fake, z in train discriminator")
-            print(z_fake.size(), x_fake.size(), z.size())
             # Compute D loss
             encoder_score = discriminator(x, z_fake.detach())
             decoder_score = discriminator(x_fake.detach(), z.detach())
