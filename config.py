@@ -21,7 +21,7 @@ def get_config():
     parser.add_argument('--beta2', type=float, default=0.999)
     parser.add_argument('--d_steps_per_iter', type=int, default=1, help='how many D updates per iteration')
     parser.add_argument('--g_steps_per_iter', type=int, default=1, help='how many G updates per iteration')
-    parser.add_argument('--n_epochs', type=int, default=1000)
+    parser.add_argument('--n_epochs', type=int, default=200)
     parser.add_argument('--start_epoch', type=int, default=1)
     parser.add_argument('--seed', type=int, default=51)
 
