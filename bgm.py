@@ -117,11 +117,12 @@ class BGM(nn.Module):
 
         self.encoder = ResEncoder(latent_dim, enc_arch, enc_dist, enc_fc_size, enc_noise_dim)
         self.decoder = BigDecoder(latent_dim, conv_dim, image_size, dec_dist)
+        "I am in BGM init function.."
         if 'scm' in prior:
             self.prior = SCM(num_label, A, scm_type=prior)
 
-        print("SCM prior:")
-        print(self.prior)
+        #print("SCM prior:")
+        #print(self.prior)
         #print("num_label:")
         #print(self.num_label)
 
