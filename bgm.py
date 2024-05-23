@@ -186,6 +186,7 @@ class BGM(nn.Module):
 
             if 'scm' in self.prior_dist:
                 # in prior
+                print("calling self.prior with z")
                 label_z = self.prior(z[:, :self.num_label]) # z after causal layer
                 other_z = z[:, self.num_label:]
                 print(other_z.size())
