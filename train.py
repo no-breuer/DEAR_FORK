@@ -93,8 +93,8 @@ def main():
     decoder_optimizer = optim.Adam(dec_param, lr=args.lr_g, betas=(args.beta1, args.beta2))
     D_optimizer = optim.Adam(discriminator.parameters(), lr=args.lr_d, betas=(args.beta1, args.beta2))
 
-    print('Prior parameters:...')
-    print(prior_param)
+    print('A:')
+    print(model.prior.A)
     # Load model from checkpoint
     if args.resume:
         ckpt_dir = args.ckpt_dir if args.ckpt_dir != '' else save_dir + args.model_type + str(
