@@ -186,15 +186,7 @@ class BGM(nn.Module):
 
             if 'scm' in self.prior_dist:
                 # in prior
-                print("calling prior with z")
-                print("Z:")
-                print(z[:, :self.num_label])
                 label_z = self.prior(z[:, :self.num_label]) # z after causal layer
-                #print("label z size")
-                #print("this is self.prior")
-                #print(self.prior)
-                #print(label_z.size())
-                #print(label_z)
                 other_z = z[:, self.num_label:]
                 print(other_z.size())
                 z = torch.cat([label_z, other_z], dim=1)

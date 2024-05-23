@@ -95,6 +95,7 @@ class SCM(nn.Module):
         self.A_fix_idx = A == 0
         self.A = nn.Parameter(torch.zeros(d, d))
 
+        print("I am in SCM init fnc")
         # Elementwise nonlinear mappings
         if scm_type=='linscm':
             prior_net_model = lambda : InvertiblePriorLinear()
