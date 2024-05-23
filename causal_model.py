@@ -145,6 +145,7 @@ class SCM(nn.Module):
         print(self.A)
         print("adj normalized")
         print(adj_normalized)
+        print(eps)
         z_pre = torch.matmul(eps, adj_normalized)
         return z_pre
 
