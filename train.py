@@ -94,6 +94,7 @@ def main():
     D_optimizer = optim.Adam(discriminator.parameters(), lr=args.lr_d, betas=(args.beta1, args.beta2))
 
     print("asserting")
+    print(prior_param[0:1])
     assert prior_param[0:1] == A, "A ist gleich prior param"
     # Load model from checkpoint
     if args.resume:
