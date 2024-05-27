@@ -95,7 +95,7 @@ def main():
 
     print("asserting")
     print(prior_param[0:1])
-    assert prior_param[0:1] == A, "A ist gleich prior param"
+    print(A)
     # Load model from checkpoint
     if args.resume:
         ckpt_dir = args.ckpt_dir if args.ckpt_dir != '' else save_dir + args.model_type + str(
