@@ -84,7 +84,6 @@ def main():
         enc_param = model.encoder.parameters()
         dec_param = list(model.decoder.parameters())
         prior_param = list(model.prior.parameters())
-        print(prior_param)
         A_optimizer = optim.Adam(prior_param[0:1], lr=args.lr_a)
         prior_optimizer = optim.Adam(prior_param[1:], lr=args.lr_p, betas=(args.beta1, args.beta2))
     else:
@@ -94,8 +93,8 @@ def main():
     decoder_optimizer = optim.Adam(dec_param, lr=args.lr_g, betas=(args.beta1, args.beta2))
     D_optimizer = optim.Adam(discriminator.parameters(), lr=args.lr_d, betas=(args.beta1, args.beta2))
 
-    print('A:')
-    print(model.prior.A)
+    print("asserting")
+    assert prior_param[0:1] == A, "A ist gleich prior param"
     # Load model from checkpoint
     if args.resume:
         ckpt_dir = args.ckpt_dir if args.ckpt_dir != '' else save_dir + args.model_type + str(
