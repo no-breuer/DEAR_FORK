@@ -12,7 +12,6 @@ class InvertiblePriorLinear(nn.Module):
     def forward(self, eps):
         print("i am computing o in invertible prior lineaer")
         o = self.p[0] * eps + self.p[1]
-        print(o.shape)
         return o
     def inverse(self, o):
         eps = (o - self.p[1])/self.p[0]

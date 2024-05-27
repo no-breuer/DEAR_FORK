@@ -84,6 +84,7 @@ def main():
         enc_param = model.encoder.parameters()
         dec_param = list(model.decoder.parameters())
         prior_param = list(model.prior.parameters())
+        print(prior_param)
         A_optimizer = optim.Adam(prior_param[0:1], lr=args.lr_a)
         prior_optimizer = optim.Adam(prior_param[1:], lr=args.lr_p, betas=(args.beta1, args.beta2))
     else:
