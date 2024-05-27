@@ -10,7 +10,9 @@ class InvertiblePriorLinear(nn.Module):
         self.p = nn.Parameter(torch.rand([2]))
 
     def forward(self, eps):
+        print("i am computing o in invertible prior lineaer")
         o = self.p[0] * eps + self.p[1]
+        print(o.shape)
         return o
     def inverse(self, o):
         eps = (o - self.p[1])/self.p[0]
@@ -80,10 +82,8 @@ class InvertiblePriorInv(nn.Module):
         super(InvertiblePriorInv, self).__init__()
         self.prior = prior
     def forward(self, o):
-        print("we are in invertpriorinv")
         return self.prior.inverse(o)
     def inverse(self, eps):
-        print("we are in invertpriorinv")
         return self.prior(eps)
 
 
@@ -141,10 +141,6 @@ class SCM(nn.Module):
 
     def inv_cal(self, eps): # (I-A)^{-1}*eps
         adj_normalized = torch.inverse(torch.eye(self.A.shape[0], device=self.A.device) - self.A)
-        print("A:")
-        print(self.A.shape)
-        print("adj normalized")
-        print(adj_normalized)
         z_pre = torch.matmul(eps, adj_normalized)
         return z_pre
 
@@ -166,11 +162,6 @@ class SCM(nn.Module):
             print("I am in SCM forward")
             # (I-A.t)^{-1}*eps
             z = self.inv_cal(eps) # n x d
-            print("eps shape")
-            print(eps.shape)
-            print("z shape")
-            print(z.shape)
-            assert eps == z, "eps and z are not the same"
             # nonlinear transform
             return self.prior_nlr(z)
         else:
