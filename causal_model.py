@@ -166,9 +166,9 @@ class SCM(nn.Module):
             print("I am in SCM forward")
             # (I-A.t)^{-1}*eps
             z = self.inv_cal(eps) # n x d
-            print("this is eps and eps shape")
+            print("eps shape")
             print(eps.shape)
-            print(eps)
+            print("z shape")
             print(z.shape)
             # nonlinear transform
             return self.prior_nlr(z)
