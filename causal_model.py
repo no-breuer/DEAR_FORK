@@ -170,6 +170,7 @@ class SCM(nn.Module):
             print(eps.shape)
             print("z shape")
             print(z.shape)
+            assert eps == z, "eps and z are not the same"
             # nonlinear transform
             return self.prior_nlr(z)
         else:
