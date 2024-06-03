@@ -71,6 +71,8 @@ def main():
         A = None
 
     print('Build models...')
+    print("This is A")
+    print(A)
     model = BGM(args.latent_dim, args.g_conv_dim, args.image_size,
                 args.enc_dist, args.enc_arch, args.enc_fc_size, args.enc_noise_dim, args.dec_dist,
                 args.prior, num_label, A)
@@ -93,9 +95,6 @@ def main():
     decoder_optimizer = optim.Adam(dec_param, lr=args.lr_g, betas=(args.beta1, args.beta2))
     D_optimizer = optim.Adam(discriminator.parameters(), lr=args.lr_d, betas=(args.beta1, args.beta2))
 
-    print("asserting")
-    print(prior_param[0:1])
-    print(A)
     # Load model from checkpoint
     if args.resume:
         ckpt_dir = args.ckpt_dir if args.ckpt_dir != '' else save_dir + args.model_type + str(

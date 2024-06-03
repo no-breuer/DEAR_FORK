@@ -119,6 +119,8 @@ class BGM(nn.Module):
         self.decoder = BigDecoder(latent_dim, conv_dim, image_size, dec_dist)
         print("I am in BGM init function..")
         if 'scm' in prior:
+            print("This is A")
+            print(A)
             self.prior = SCM(num_label, A, scm_type=prior)
 
         #print("SCM prior:")

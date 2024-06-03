@@ -89,6 +89,8 @@ class InvertiblePriorInv(nn.Module):
 class SCM(nn.Module):
     def __init__(self, d, A=None, scm_type='mlp'):
         super().__init__()
+        print("This is A")
+        print(A)
         self.d = d
         self.A_given = A
         self.A_fix_idx = A == 0
