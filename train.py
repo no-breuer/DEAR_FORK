@@ -71,8 +71,6 @@ def main():
         A = None
 
     print('Build models...')
-    print("This is A")
-    print(A)
     model = BGM(args.latent_dim, args.g_conv_dim, args.image_size,
                 args.enc_dist, args.enc_arch, args.enc_fc_size, args.enc_noise_dim, args.dec_dist,
                 args.prior, num_label, A)
