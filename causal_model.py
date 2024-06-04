@@ -93,7 +93,6 @@ class SCM(nn.Module):
         self.A_given = A
         self.A_fix_idx = A == 0
         self.A = nn.Parameter(torch.zeros(d, d))
-        print(scm_type)
 
         # Elementwise nonlinear mappings
         if scm_type=='linscm':
